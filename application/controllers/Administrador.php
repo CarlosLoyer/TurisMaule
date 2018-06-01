@@ -8,9 +8,13 @@ class Administrador extends CI_Controller{
     }
     
     public function index(){
-        $this->load->view('template2/header');
-        $this->load->view('administrador/home');
-        $this->load->view('template2/footer');
+        if ($this->session->userdata("usuario")) {
+            $this->load->view('template2/header');
+            $this->load->view('administrador/home');
+            $this->load->view('template2/footer');
+        } else {
+            redirect('login');
+        }
     }
     
 }

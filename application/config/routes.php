@@ -53,6 +53,13 @@ $route['default_controller'] = 'welcome';
 $route['login'] = 'welcome/index';
 $route['recuperar'] = 'welcome/recuperar';
 $route['login2'] = 'welcome/login';
+$route['logout'] = 'welcome/logout';
+
+//------- RUTAS DEL ADMIN
+
+$route['administrador'] = 'administrador/index';
+
+//-----------------------
 
 $route['404_override'] = 'Error404';
 $route['translate_uri_dashes'] = FALSE;

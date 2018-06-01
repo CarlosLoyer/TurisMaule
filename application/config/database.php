@@ -75,10 +75,10 @@ $query_builder = TRUE;
 
 $db['default'] = array(
 	'dsn'	=> '',
-	'hostname' => 'localhost',
-	'username' => 'root',
-	'password' => '',
-	'database' => 'estacionamiento',
+	'hostname' => '186.64.116.10',
+	'username' => 'ingenie4_Troot',
+	'password' => 'Hipo201293',
+	'database' => 'ingenie4_turismaule',
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
 	'pconnect' => FALSE,

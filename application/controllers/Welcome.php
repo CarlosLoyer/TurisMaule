@@ -28,13 +28,21 @@ class Welcome extends CI_Controller {
         //[{rut=>1-1, nombre=>juan,...}] <=  lo de arriba debiera devolver algo asi
         if (count($arrayUser) > 0) {
             if ($arrayUser[0]->estado == 'Activo') {
+                //CREAR UNA SESION
+                $this->session->set_userdata("usuario", $arrayUser);
                 echo json_encode(array("msg" => "Activo"));
             } else {
                 echo json_encode(array("msg" => "Bloqueado"));
             }
         } else {
-            echo json_encode(array("msg" => "Usuario y/o contraseña incorrectos"));
+            echo json_encode(array("msg" => "0"));
         }
+    }
+    
+    public function logout(){
+        
+        $this->session->sess_destroy();
+        redirect('login');
     }
 
 }
