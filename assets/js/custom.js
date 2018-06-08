@@ -1,6 +1,6 @@
 $(document).ready(function () {
 
-    var base_url = "http://localhost:8080/Parking/";
+    var base_url = "http://localhost:8080/TurisMaule/";
 
     $("#bt_login").click(function (e) {
         e.preventDefault();
@@ -13,7 +13,15 @@ $(document).ready(function () {
             dataType: 'json',
             data: {username: username, password: password},
             success: function (o) {
-                Materialize.toast(o.msg, "4000");
+                if (o.msg === "0") {
+                    Materialize.toast("Usuario y/o contrasena incorrectos", "4000");
+                } else if (o.msg === "Activo") {
+                    window.location.href = base_url + "administrador";
+                } else {
+                    Materialize.toast("El usuario se encuentra Bloqueado", "4000");
+                }
+
+
             },
             error: function () {
                 Materialize.toast("Error 500", "4000");
@@ -26,3 +34,4 @@ $(document).ready(function () {
 
 
 });
+

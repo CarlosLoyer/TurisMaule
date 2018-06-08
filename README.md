@@ -1,2 +1,0 @@
-# TurisMaule
-Proyecto académico TurisMaule
