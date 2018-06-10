@@ -56,9 +56,13 @@ $route['login2'] = 'welcome/login';
 $route['logout'] = 'welcome/logout';
 
 //------- RUTAS DEL ADMIN
-
+//VISTAS
 $route['administrador'] = 'administrador/index';
+$route['vista_puntos'] = 'administrador/vistaPuntos';
+//FUNCIONES
+$route['puntos'] = 'administrador/puntos';
 
+$route['insertarPunto'] = 'administrador/insertarPunto';
 //-----------------------
 
 $route['404_override'] = 'Error404';

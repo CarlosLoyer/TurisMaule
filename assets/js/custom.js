@@ -1,6 +1,6 @@
 $(document).ready(function () {
 
-    var base_url = "http://localhost:8080/TurisMaule/";
+    var base_url = "http://localhost/TurisMaule/";
 
     $("#bt_login").click(function (e) {
         e.preventDefault();
@@ -30,6 +30,15 @@ $(document).ready(function () {
         });
 
 
+    });
+    
+    //ELEMENTOS QUE CARGAN EL CONTENIDO EN LA PAGINA MAIN AL PINCHAR SOBRE LOS ITEMS DEL MENU
+    
+        $("#item_punto").on("click", function(e){
+        e.preventDefault();
+        $("main").load(base_url+"vista_puntos");
+        $("a").removeClass("active-page");
+        $("#item_punto").addClass("active-page");
     });
 
 
