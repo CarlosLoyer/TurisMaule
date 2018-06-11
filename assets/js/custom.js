@@ -1,6 +1,6 @@
 $(document).ready(function () {
 
-    var base_url = "http://localhost/TurisMaule/";
+    var base_url = "http://localhost:8080/TurisMaule/";
 
     $("#bt_login").click(function (e) {
         e.preventDefault();

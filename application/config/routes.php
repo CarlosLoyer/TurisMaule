@@ -63,6 +63,7 @@ $route['vista_puntos'] = 'administrador/vistaPuntos';
 $route['puntos'] = 'administrador/puntos';
 
 $route['insertarPunto'] = 'administrador/insertarPunto';
+$route['editarPunto'] = 'administrador/editarPunto';
 //-----------------------
 
 $route['404_override'] = 'Error404';

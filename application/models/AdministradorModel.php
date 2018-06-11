@@ -25,4 +25,10 @@ class AdministradorModel extends CI_Model {
         return $this->db->insert("punto_turistico", $data);
     }
 
+    public function editarPunto($id_punto, $titulo, $descripcion, $latitud, $longitud) {
+        $data = array("id_punto" => $id_punto, "titulo" => $titulo, "descripcion" => $descripcion, "latitud" => $latitud, "longitud" => $longitud);
+        $this->db->where("id_punto", $id_punto);
+        return $this->db->update("punto_turistico", $data);
+    }
+
 }

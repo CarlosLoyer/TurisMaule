@@ -24,8 +24,8 @@
         <link href="<?php echo base_url(); ?>assets/css/custom.css" rel="stylesheet" type="text/css"/>
         
         <script>
-            var URL = "http://localhost/TurisMaule/";
-            var base_url = "http://localhost/TurisMaule/";
+            var URL = "http://localhost:8080/TurisMaule/";
+            var base_url = "http://localhost:8080/TurisMaule/";
         </script>
 
 

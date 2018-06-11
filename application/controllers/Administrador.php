@@ -32,10 +32,12 @@ class Administrador extends CI_Controller {
         }
     }
 
+    //CARGA LISTA DE REGISTROS DE PUNTOS TURISTICOS EN FORMATO JSON
     public function puntos() {
         echo json_encode($this->AdministradorModel->puntos());
     }
 
+    //FUNCION QUE PERMITE INSERTAR UN NUEVO PUNTO EN LA BASE DE DATOS
     public function insertarPunto() {
         $titulo = $this->input->post("titulo");
         $descripcion = $this->input->post("descripcion");
@@ -46,6 +48,26 @@ class Administrador extends CI_Controller {
         if ($clave === "3F!9#") {
             if ($this->AdministradorModel->insertarPunto($titulo, $descripcion, $latitud, $longitud)) {
                 echo json_encode(array("msg" => "Punto turistico creado!"));
+            } else {
+                echo json_encode(array("msg" => "Ha ocurrido un error!"));
+            }
+        } else {
+            echo json_encode(array("msg" => "Validacion rechazada"));
+        }
+    }
+
+    //FUNCION QUE PERMITE EDITAR UN PUNTO TURISTICO EN LA BASE DE DATOS
+    public function editarPunto() {
+        $id_punto = $this->input->post("id");
+        $titulo = $this->input->post("titulo");
+        $descripcion = $this->input->post("descripcion");
+        $latitud = $this->input->post("latitud");
+        $longitud = $this->input->post("longitud");
+        $clave = $this->input->post("key");
+
+        if ($clave === "3F!9#") {
+            if ($this->AdministradorModel->editarPunto($id_punto, $titulo, $descripcion, $latitud, $longitud)) {
+                echo json_encode(array("msg" => "Punto turistico actualizado!"));
             } else {
                 echo json_encode(array("msg" => "Ha ocurrido un error!"));
             }

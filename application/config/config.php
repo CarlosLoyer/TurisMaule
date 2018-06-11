@@ -24,7 +24,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |
 */
 //$config['base_url'] = 'http://turis.ostrichgroup.cl/';
-$config['base_url'] = 'http://localhost/TurisMaule/';
+//$config['base_url'] = 'http://localhost/TurisMaule/';
+$config['base_url'] = 'http://localhost:8080/TurisMaule/';
 /*
 |--------------------------------------------------------------------------
 | Index File
