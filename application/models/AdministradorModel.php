@@ -31,4 +31,10 @@ class AdministradorModel extends CI_Model {
         return $this->db->update("punto_turistico", $data);
     }
 
+    public function eliminarPunto($id_punto) {
+        $data = array("id_punto" => $id_punto);
+        $this->db->where("id_punto", $id_punto);
+        return $this->db->delete("punto_turistico", $data);
+    }
+
 }

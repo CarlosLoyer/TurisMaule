@@ -75,5 +75,21 @@ class Administrador extends CI_Controller {
             echo json_encode(array("msg" => "Validacion rechazada"));
         }
     }
+    
+        //FUNCION QUE PERMITE ELIMINAR UN PUNTO TURISTICO EN LA BASE DE DATOS
+    public function eliminarPunto() {
+        $id_punto = $this->input->post("id");
+        $clave = $this->input->post("key");
+
+        if ($clave === "3F!9#") {
+            if ($this->AdministradorModel->eliminarPunto($id_punto)) {
+                echo json_encode(array("msg" => "Punto turistico eliminado!"));
+            } else {
+                echo json_encode(array("msg" => "Ha ocurrido un error!"));
+            }
+        } else {
+            echo json_encode(array("msg" => "Validacion rechazada"));
+        }
+    }
 
 }

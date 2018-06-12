@@ -64,6 +64,11 @@ $route['puntos'] = 'administrador/puntos';
 
 $route['insertarPunto'] = 'administrador/insertarPunto';
 $route['editarPunto'] = 'administrador/editarPunto';
+$route['eliminarPunto'] = 'administrador/eliminarPunto';
+
+//FUNCIONES REST APP
+$route['restUsuarios'] = 'RestApp/usuarios';
+$route['restPuntos'] = 'RestApp/puntos';
 //-----------------------
 
 $route['404_override'] = 'Error404';

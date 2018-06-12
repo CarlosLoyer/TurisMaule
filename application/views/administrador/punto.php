@@ -14,31 +14,12 @@
 
                 <div class='col s6'>
 
-                    <div id="map" style="width:350px; height: 250px; border: solid; border-color: #424242  "></div>
-                    <div id="test"></div>
-                    <script>
-                        function initMap() {
-                            var uluru = {lat: -35.436281, lng: -71.624133};
-                            var divql = document.getElementById('test');
-                            var map = new google.maps.Map(document.getElementById('map'), {
-                                zoom: 16,
-                                center: uluru
-                            });
-                            var marker = new google.maps.Marker({
-                                position: uluru,
-                                map: map
-                            });
-                            map.addListener('click', function (e) {
-                                var evt = e.latLng;
-                                document.getElementById("latitud").value = evt.lat();
-                                document.getElementById("longitud").value = evt.lng();
-                            });
-                        }
-                    </script>
+                    <div id="map" style="width:350px; height: 250px; border: solid; border-color: #424242"></div>
 
-                    <script async defer
-                            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCRidDqlGtF8UtbGzJHFsKbEC40iRRkUng&callback=initMap">
-                    </script>
+
+                    <script async defer 
+                            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA8dG4r-GtGqPpCED-cTi532rQZINcLLEs"
+                    type="text/javascript"></script>
 
 
 
@@ -86,27 +67,7 @@
                 <div class='col s6'>
 
                     <div id="map2" style="width:350px; height: 250px; border: solid; border-color: #424242  "></div>
-                    <script>
-                        function initMap() {
-                            //var latt = document.getElementById("latitud_edit").value;
-                            //var lngg = document.getElementById("longitud_edit").value;
 
-                            var uluru = {lat: -35.436281, lng: -71.624133};
-                            var map2 = new google.maps.Map(document.getElementById('map2'), {
-                                zoom: 16,
-                                center: uluru
-                            });
-                            var marker = new google.maps.Marker({
-                                position: uluru,
-                                map: map2
-                            });
-                            map2.addListener('click', function (e) {
-                                var evt = e.latLng;
-                                document.getElementById("latitud_edit").value = evt.lat();
-                                document.getElementById("longitud_edit").value = evt.lng();
-                            });
-                        }
-                    </script>
                     <br/>
 
                 </div>
@@ -141,7 +102,7 @@
                 </div>
 
             </div>
-            <button type="submit" id='bt_del_punto' class='btn disabled'>
+            <button type="submit" id='bt_del_punto' class='btn disabled' disabled>
                 ELIMINAR PUNTO
             </button>
         </form>
@@ -155,7 +116,7 @@
             <h4 class="center-align">PUNTOS TURISTICOS</h4>
 
             <!-- Modal Trigger -->
-            <a class="waves-effect waves-light btn-floating modal-trigger" href="#modal_punto">
+            <a class="waves-effect waves-light btn-floating modal-trigger" href="#modal_punto" onclick="return initMap1();">
                 <i class='material-icons'>add</i>
             </a>
             <br />
@@ -197,6 +158,7 @@
     $('.modal-trigger').leanModal({
         height: "100%"
     });
+
     //FUNCION QUE TRAE LOS PUNTOS TURISTICOS Y LOS CARGA DENTRO DE LA TABLA
     puntos();
     function puntos() {
@@ -216,7 +178,7 @@
             });
         });
     }
-    //FIN FUNCION PUNTOS A TABLA
+    //fin funcion puntos en tabla
 
     //FUNCION QUE PERMITE AÑADIR UN PUNTO TURISTICO TRAS PINCHAR EL BOTON "CREAR PUNTO" EN EL MODAL
     $("#bt_add_punto").bind("click", function (e) {
@@ -245,7 +207,7 @@
             });
         }
     });
-    //FIN FUNCION AÑADIR PUNTO
+    //fin funcion añadir punto
 
     //FUNCION QUE PERMITE CARGAR LOS CAMPOS DE TEXTO AL PINCHAR SOBRE EL BOTON MODIFICAR EN LA TABLA
     $("body").on("click", "#btn_edit_punto", function (e) {
@@ -261,8 +223,10 @@
         $("#descripcion_punto_edit").val($(descripcion).text());
         $("#latitud_edit").val($(latitud).text());
         $("#longitud_edit").val($(longitud).text());
+        initMap();
         $('#modal_punto_edit').openModal();
     });
+    //fin funcion cargar textos modificar
 
     //FUNCION QUE PERMITE INGRESAR LA MODIFICACION DEL PUNTO
     $("#bt_edit_punto").bind("click", function (e) {
@@ -288,7 +252,7 @@
             }
         });
     });
-    //FIN FUNCION MODIFICAR
+    //fin funcion modificar
 
     //FUNCION QUE PERMITE CARGAR EL ID AL PINCHAR SOBRE EL BOTON ELIMINAR EN LA TABLA
     $("body").on("click", "#btn_del_punto", function (e) {
@@ -301,20 +265,87 @@
         document.getElementById('titulo_punto_del').innerHTML = '> ' + $(titulo).text() + ' <';
         $('#modal_punto_del').openModal();
     });
+    //fin funcion cargar ID
 
-
-    $("#chk_del_punto").bind("click", function (e) {
+    //FUNCION QUE HABILITA O DESHABILITA BOTON DE ELIMINAR SEGUN ACTIVACION DE CHECKBOX "CONFIRMAR"
+    $("#chk_del_punto").bind("change", function (e) {
         e.preventDefault();
         var chkBox = document.getElementById('chk_del_punto');
         if (chkBox.checked)
         {
-            $('#MyElement').addClass('MyClass');
-
-            $('#MyElement').removeClass('MyClass');
-        }else{
-            
+            $('#bt_del_punto').removeClass('disabled');
+            document.getElementById("bt_del_punto").disabled = false;
+        } else {
+            $('#bt_del_punto').addClass('disabled');
+            document.getElementById("bt_del_punto").disabled = true;
         }
 
     });
+    //fin funcion checkbox "confirmar"
+
+    //FUNCION QUE PERMITE ELIMINAR UN PUNTO
+    $("#bt_del_punto").bind("click", function (e) {
+        e.preventDefault();
+        var id = $("#id_punto_del").val();
+        var key = "3F!9#";
+        $.ajax({
+            url: URL + 'eliminarPunto',
+            type: 'post',
+            dataType: 'json',
+            data: {id: id, key: key},
+            success: function (o) {
+                Materialize.toast(o.msg, "3000");
+                puntos();
+                $("#modal_punto_del").closeModal();
+            },
+            error: function () {
+                Materialize.toast("500", "3000");
+            }
+        });
+    });
+    //fin funcion eliminar
+
+    //FUNCION QUE INICIALIZA EL MAPA AL MOMENTO DE CREAR UN PUNTO
+    function initMap1() {
+        var uluru = {lat: -35.42652199501807, lng: -71.665911803742};
+        var map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 16,
+            center: uluru
+        });
+        var marker = new google.maps.Marker({
+            position: uluru,
+            map: map
+        });
+        map.addListener('click', function (e) {
+            var evt = e.latLng;
+            document.getElementById("latitud").value = evt.lat();
+            document.getElementById("longitud").value = evt.lng();
+        });
+    }
+    //fin funcion al crear punto
+
+    //FUNCION QUE INICIALIZA EL MAPA AL EDITAR UN PUNTO
+    function initMap() {
+        var latt = document.getElementById("latitud_edit").value;
+        var lngg = document.getElementById("longitud_edit").value;
+
+        //-35.436281 -71.624133
+
+        var uluru = {lat: parseFloat(latt), lng: parseFloat(lngg)};
+        var map2 = new google.maps.Map(document.getElementById('map2'), {
+            zoom: 16,
+            center: uluru
+        });
+        var marker = new google.maps.Marker({
+            position: uluru,
+            map: map2
+        });
+        map2.addListener('click', function (e) {
+            var evt = e.latLng;
+            document.getElementById("latitud_edit").value = evt.lat();
+            document.getElementById("longitud_edit").value = evt.lng();
+        });
+    }
+    //fin funcion al editar punto
 
 </script>
